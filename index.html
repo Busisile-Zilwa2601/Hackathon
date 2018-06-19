@@ -3,19 +3,33 @@
 <head>
 <title>Cape Town</title>
   <link href="css/skeleton.css" rel ="stylesheet" >
-  <link href="index.css" rel ="stylesheet" >
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #map {
+        height: 50%;
+      }
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnDSmR7DEpRrpi-GNbJk_Xz2y8kby7Av0&callback=initMap"
+            async defer></script>
 </head>
 
 
 <body>
   <div class="container">
-
   <div class="row">
     <div class="twelve columns">
     <h1>Cape Town</h1>
     </div>
   </div>
+      <div class="row">
+          <div id="map"><iframe></iframe>
+          </div>
+      </div>
     <div class='row'>
       <div class = 'six columns'>
         <ul>
@@ -44,13 +58,14 @@
           </table>
         </div>
     </div>
-
     <div class='row'>
       <div class = 'twelve columns'>
-    <div id="piechart"></div>
-
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+        <div id="piechart"></div>
+        </div>
+    </div>
+  </div>  
+</body>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
 	// Load google charts
 	google.charts.load('current', {'packages':['corechart']});
@@ -75,8 +90,14 @@
 	  chart.draw(data, options);
 	}
 	</script>
-  </div>
-    </div>
-  </div>
-</body>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -33.918861, lng: 18.423300},
+          zoom: 8
+        });
+      }
+    </script>
+    
 </html>
