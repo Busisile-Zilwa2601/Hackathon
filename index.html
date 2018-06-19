@@ -9,6 +9,8 @@
 
 
 <body>
+  <div class="container">
+
   <div class="row">
     <div class="twelve columns">
     <h1>Cape Town</h1>
@@ -41,6 +43,39 @@
             </tr>
           </table>
         </div>
+    </div>
+
+    <div class='row'>
+      <div class = 'twelve columns'>
+    <div id="piechart"></div>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+	<script type="text/javascript">
+	// Load google charts
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+
+	// Draw the chart and set the chart values
+	function drawChart() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Population ', 'Percentage'],
+	  ['Coloured', 42.39],
+	  ['White', 15.66],
+	  ['Black African', 38.63],
+	  ['Other', 1.93],
+	  ['Indian or Asian', 1.38]
+	]);
+
+	  // Optional; add a title and set the width and height of the chart
+	  var options = {'title':'Population Group', 'width':750, 'height':600};
+
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+	  chart.draw(data, options);
+	}
+	</script>
+  </div>
     </div>
   </div>
 </body>
