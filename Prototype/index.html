@@ -1,5 +1,6 @@
-<!Doctype html>
-<html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
     <title>Cape Town</title>
@@ -38,22 +39,12 @@
 
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
-                    center: {
-                        lat: -33.918861,
-                        lng: 18.423300
-                    },
-                    zoom: 8
-                });/*
-                var marker = new google.maps.Marker({
-                    position: {
-                        lat: -33.918861,
-                        lng: 18.423300
-                    }
-                });*/
-                var kml = new google.maps.KmlLayer({
-                  url: 'https://busisile-zilwa2601.github.io/Hackathon/Prototype/',
-                  map: map
+                  mapTypeId: google.maps.MapTypeId.HYBRID
                 });
+
+                var kmllayer = new google.maps.KmlLayer(
+                  "https://census2011.adrianfrith.com/place/199/kml",
+                  {map: map, clickable: false});
             }
 
         </script>
