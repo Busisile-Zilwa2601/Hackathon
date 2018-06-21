@@ -3,31 +3,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <title>Cape Town</title>
-    <link href="css/skeleton.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-    <script src="js/proto.js"></script>
-    <style>
-        #map {
-            height: 400px;
-            width: 40%;
-        }
+  <title>Cape Town</title>
+  <link href="css/skeleton.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="js/proto.js"></script>
+  <style>
+    #map {
+      height: 400px;
+      width: 40%;
+    }
 
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 
-    </style>
-
-    <script type = 'text/x-template' class= 'theFilter'>
-      <select id = 'forMap'>
+  <script type='text/x-template' class='theFilter'>
+    <select id='forMap'>
         {{#makeDropdown 'filter'}}
           CapeTown
           Khayelitsha
+          Langa
+          Parow
+          Goodwood
         {{/makeDropdown}}
       </script>
     </script>
@@ -160,7 +162,9 @@
     var selected = document.getElementById('forMap');
     var map;
     var url;
-    var thelist = [{CapeTown: "https://census2011.adrianfrith.com/place/199/kml"},{Khayelitsha:"https://census2011.adrianfrith.com/place/199038/kml"}];
+    var thelist = [{CapeTown: "https://census2011.adrianfrith.com/place/199/kml"},
+      {Khayelitsha:"https://census2011.adrianfrith.com/place/199038/kml"}];
+
     if(selected.options[selected.selectedIndex].value === 'CapeTown'){
         for(var i =0; i< thelist.length; i++){
           url = thelist[i].CapeTown;
@@ -177,25 +181,28 @@
            {position:{lat: 18.58435864, lng: -33.9379211}
          });
 
-        var cptLayer = showCapeTown();
+         var cptLayer = showCapeTown();
+
+
         setTimeout(function(){
           cptLayer.setMap(null);
-          showKhayelitsha();
+          showKhayalitsha();
         }, 5000)
-
-
     }
+
     function showCapeTown(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[0].CapeTown,
         {map: map, clickable: false});
-        return kmllayer;
+      return kmllayer;
     }
-    function showKhayelitsha(){
+
+    function showKhayalitsha(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[1].Khayelitsha,
         {map: map, clickable: false});
     }
+
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz9g0tAMVgP8bZx5LYtbY1t42Y_nsCTTw&callback=initMap"></script>
 
