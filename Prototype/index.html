@@ -6,6 +6,8 @@
     <title>Cape Town</title>
     <link href="css/skeleton.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script src="js/proto.js"></script>
     <style>
         #map {
             height: 400px;
@@ -20,8 +22,17 @@
         }
 
     </style>
+
+    <script type = 'text/x-template' class= 'theFilter'>
+      <select id = 'forMap'>
+        {{#makeDropdown 'filter'}}
+          CapeTown
+          Khayelitsha
+        {{/makeDropdown}}
+      </script>
+    </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="js/proto.js"></script>
+
 </head>
 
 <body>
@@ -31,24 +42,12 @@
                 <h1>Cape Town</h1>
             </div>
         </div>
+        <div class = 'row'>
+          <div id ='filterPart'></div>
+        </div>
         <div class="row">
             <div id="map"></div>
         </div>
-        <script>
-            var map;
-
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                  mapTypeId: google.maps.MapTypeId.HYBRID
-                });
-
-                var kmllayer = new google.maps.KmlLayer(
-                  "https://census2011.adrianfrith.com/place/199/kml",
-                  {map: map, clickable: false});
-            }
-
-        </script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz9g0tAMVgP8bZx5LYtbY1t42Y_nsCTTw&callback=initMap"></script>
         <div class='row'>
             <div class='six columns'>
                 <ul>
@@ -154,5 +153,34 @@
     Plotly.newPlot('myDiv', data, layout);
 
 </script>
+<script>
+    window.addEventListener('load', function(){
+
+    });
+    var selected = document.getElementById('forMap');
+    var map;
+    var url;
+    var thelist = [{CapeTown: "https://census2011.adrianfrith.com/place/199/kml"},{Khayelitsha:"https://census2011.adrianfrith.com/place/199038/kml"}];
+    if(selected.options[selected.selectedIndex].value === 'CapeTown'){
+        for(var i =0; i< thelist.length; i++){
+          url = thelist[i].CapeTown;
+          break;
+        }
+    }
+    var map;
+    //var thelist = [{CapeTown: "https://census2011.adrianfrith.com/place/199/kml"},{Khayelitsha:"https://census2011.adrianfrith.com/place/199038/kml"}];
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          mapTypeId: google.maps.MapTypeId.HYBRID
+        });
+        var marker = new google.maps.Marker(
+           {position:{lat: 18.58435864, lng: -33.9379211}
+         });
+        var kmllayer = new google.maps.KmlLayer(
+          thelist[1].Khayelitsha,
+          {map: map, clickable: false});
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz9g0tAMVgP8bZx5LYtbY1t42Y_nsCTTw&callback=initMap"></script>
 
 </html>
