@@ -176,9 +176,25 @@
         var marker = new google.maps.Marker(
            {position:{lat: 18.58435864, lng: -33.9379211}
          });
-        var kmllayer = new google.maps.KmlLayer(
-          thelist[1].Khayelitsha,
-          {map: map, clickable: false});
+
+        var cptLayer = showCapeTown();
+        setTimeout(function(){
+          cptLayer.setMap(null);
+          showKhayelitsha();
+        }, 5000)
+
+
+    }
+    function showCapeTown(){
+      var kmllayer = new google.maps.KmlLayer(
+        thelist[0].CapeTown,
+        {map: map, clickable: false});
+        return kmllayer;
+    }
+    function showKhayelitsha(){
+      var kmllayer = new google.maps.KmlLayer(
+        thelist[1].Khayelitsha,
+        {map: map, clickable: false});
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz9g0tAMVgP8bZx5LYtbY1t42Y_nsCTTw&callback=initMap"></script>
