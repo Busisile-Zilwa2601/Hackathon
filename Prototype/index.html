@@ -162,10 +162,10 @@
     var selected = document.getElementById('forMap');
     var map;
     var thelist = [{CapeTown: "https://census2011.adrianfrith.com/place/199/kml"},
-      {Khayelitsha:"https://census2011.adrianfrith.com/place/199038/kml"},
-      {Langa :"https://census2011.adrianfrith.com/place/199028/kml"},
-      {Parow:"https://census2011.adrianfrith.com/place/199015/kml"},
-      {HoutBay:"https://census2011.adrianfrith.com/place/199042/kml"}];
+      {Khayelitsha: "https://census2011.adrianfrith.com/place/199038/kml"},
+      {Langa : "https://census2011.adrianfrith.com/place/199028/kml"},
+      {Parow: "https://census2011.adrianfrith.com/place/199015/kml"},
+      {HoutBay: "https://census2011.adrianfrith.com/place/199042/kml"}];
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeId: google.maps.MapTypeId.HYBRID
@@ -173,21 +173,47 @@
         var marker = new google.maps.Marker(
            {position:{lat: 18.58435864, lng: -33.9379211}
          });
-         var cptLayer = showCapeTown();
-        setTimeout(function(){
+        var cptLayer = showCapeTown();
+        /*setTimeout(function(){
           cptLayer.setMap(null);
           showKhayelitsha();
-        }, 10000)
+        }, 5000)*/
+        var selectTown = document.getElementById('forMap');
+        function changeSelected(){
+          if(selectTown.options[selectTown.selectedIndex].value === 'CapeTown'){showCapeTown();}
+          else if(selectTown.options[selectTown.selectedIndex].value ==='Khayelitsha'){showKhayelitsha();}
+          else if(selectTown.options[selectTown.selectedIndex].value === 'Langa'){showLanga();}
+          else if(selectTown.options[selectTown.selectedIndex].value === 'Parow'){showParow();}
+          else if(selectTown.options[selectTown.selectedIndex].value === 'HoutBay'){showHoutBay();}
+        }
+        selectTown.addEventListener('change', function(){
+          changeSelected();
+        });
     }
     function showCapeTown(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[0].CapeTown,
         {map: map, clickable: false});
-      return kmllayer;
+        return kmllayer;
     }
-    function showKhayalitsha(){
+    function showKhayelitsha(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[1].Khayelitsha,
+        {map: map, clickable: false});
+    }
+    function showLanga(){
+      var kmllayer = new google.maps.KmlLayer(
+        thelist[2].Langa,
+        {map: map, clickable: false});
+    }
+    function showParow(){
+      var kmllayer = new google.maps.KmlLayer(
+        thelist[3].Parow,
+        {map: map, clickable: false});
+    }
+    function showHoutBay(){
+      var kmllayer = new google.maps.KmlLayer(
+        thelist[4].HoutBay,
         {map: map, clickable: false});
     }
 </script>
