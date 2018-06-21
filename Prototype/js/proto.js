@@ -15,4 +15,6 @@ document.addEventListener('DOMContentLoaded', function(){
     return output;
   });
   filterStore.innerHTML = templateFilter();
+    
+    
 });
