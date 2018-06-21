@@ -29,7 +29,7 @@
           Khayelitsha
           Langa
           Parow
-          Goodwood
+          HoutBay
         {{/makeDropdown}}
       </script>
     </script>
@@ -161,18 +161,11 @@
     });
     var selected = document.getElementById('forMap');
     var map;
-    var url;
     var thelist = [{CapeTown: "https://census2011.adrianfrith.com/place/199/kml"},
-      {Khayelitsha:"https://census2011.adrianfrith.com/place/199038/kml"}];
-
-    if(selected.options[selected.selectedIndex].value === 'CapeTown'){
-        for(var i =0; i< thelist.length; i++){
-          url = thelist[i].CapeTown;
-          break;
-        }
-    }
-    var map;
-    //var thelist = [{CapeTown: "https://census2011.adrianfrith.com/place/199/kml"},{Khayelitsha:"https://census2011.adrianfrith.com/place/199038/kml"}];
+      {Khayelitsha:"https://census2011.adrianfrith.com/place/199038/kml"},
+      {Langa :"https://census2011.adrianfrith.com/place/199028/kml"},
+      {Parow:"https://census2011.adrianfrith.com/place/199015/kml"},
+      {HoutBay:"https://census2011.adrianfrith.com/place/199042/kml"}];
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeId: google.maps.MapTypeId.HYBRID
@@ -180,36 +173,23 @@
         var marker = new google.maps.Marker(
            {position:{lat: 18.58435864, lng: -33.9379211}
          });
-
          var cptLayer = showCapeTown();
-
-
         setTimeout(function(){
           cptLayer.setMap(null);
-<<<<<<< HEAD
           showKhayelitsha();
         }, 10000)
-
-
-=======
-          showKhayalitsha();
-        }, 5000)
->>>>>>> 2b111a3f52c84249c87d9f3fa72529a4549556fa
     }
-
     function showCapeTown(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[0].CapeTown,
         {map: map, clickable: false});
       return kmllayer;
     }
-
     function showKhayalitsha(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[1].Khayelitsha,
         {map: map, clickable: false});
     }
-
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz9g0tAMVgP8bZx5LYtbY1t42Y_nsCTTw&callback=initMap"></script>
 
