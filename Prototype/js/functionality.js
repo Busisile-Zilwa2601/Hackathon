@@ -61,7 +61,7 @@ function CapeTownStatistics(){
       return myList;
     }
   }
-  console.log(parseFloat(filter('Cape Town', 'Languages')[0]['Percentage']));
+  console.log(filter('Cape Town', 'Population_Group'));
   return{
     convertorString,
     filter,

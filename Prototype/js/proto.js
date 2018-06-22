@@ -25,20 +25,27 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('genderInfoPlace').innerHTML = dataGender;
     }
   }
-
-
   function showArea(){
-    var x = document.getElementById('areaInfoPlace');
-    if(document.querySelector('input[name = "AreaButton"]: checked')){
-      if(x.style.display === 'none'){
-        x.style.display = 'block';
-        document.getElementById('genderInfoPlace').style.display = 'none';
-        document.getElementById('languagesInfoPlace').style.display = 'none';
-        document.getElementById('populationGroupInfoPlace').style.display = 'none';
-      }
-    }
+    document.getElementById('genderInfoPlace').innerHTML = '';
+    document.getElementById('populationGroupInfoPlace').innerHTML = '';
+    document.getElementById('languages').innerHTML = '';
+    var y = document.getElementById('allData').innerHTML;
   }
   (document.querySelector('.AreaButton')).addEventListener('click', showArea);
+  function showGender(){
+    document.getElementById('areaInfoPlace').innerHTML = '';
+    document.getElementById('populationGroupInfoPlace').innerHTML = '';
+    document.getElementById('languages').innerHTML = '';
+    var y = document.getElementById('allData').innerHTML;
+  }
+  (document.querySelector('.GenderButton')).addEventListener('click', showGender);
+  function showlanguages(){
+    document.getElementById('areaInfoPlace').innerHTML = '';
+    document.getElementById('populationGroupInfoPlace').innerHTML = '';
+    document.getElementById('genderInfoPlace').innerHTML = '';
+    var y = document.getElementById('allData').innerHTML;
+  }
+  (document.querySelector('.LanguagesButton')).addEventListener('click', showlanguages);
   //AreaInfor on first load
   var sourceArea = document.querySelector('.areaInfo').innerHTML;
   var templateArea = Handlebars.compile(sourceArea);
@@ -54,26 +61,31 @@ document.addEventListener('DOMContentLoaded', function(){
       onArea('Cape Town');
       setGenderTable('Cape Town');
       myBarChart('Cape Town');
+      populationBarChart('Cape Town');
     }
     else if(selectTown.options[selectTown.selectedIndex].value ==='Khayelitsha'){
       onArea('Khayelitsha');
       setGenderTable('Khayelitsha');
       myBarChart('Khayelitsha');
+      populationBarChart('Khayelitsha');
     }
     else if(selectTown.options[selectTown.selectedIndex].value === 'Langa'){
       onArea('Langa');
       setGenderTable('Langa');
       myBarChart('Langa');
+      populationBarChart('Langa');
     }
     else if(selectTown.options[selectTown.selectedIndex].value === 'Parow'){
       onArea('Parow');
       setGenderTable('Parow');
       myBarChart('Parow');
+      populationBarChart('Parow');
     }
     else if(selectTown.options[selectTown.selectedIndex].value === 'Hout Bay'){
       onArea('Hout Bay');
       setGenderTable('Hout Bay');
       myBarChart('Hout Bay');
+      populationBarChart('Hout Bay');
     }
   }
   function onArea(town){
@@ -123,4 +135,37 @@ document.addEventListener('DOMContentLoaded', function(){
     };
     return Plotly.newPlot('languagesInfoPlace', data, layout);
   }
+  function populationBarChart(town){
+    var theData = statsCpt.filter(town, 'Population_Group');
+    var theX = [];
+    var theY = [];
+    for(var i = 0; i<theData.length; i++){
+      theX.push(theData[i]['Population group']);
+      theY.push(parseFloat(theData[i]['Percentage']));
+    }
+    var trace1 = {
+      x: theX,
+      y: theY,
+      type: 'bar',
+      marker :{color:'rgb(142,124,195)'}
+    };
+    var data = [trace1];
+    var layout = {
+        title: 'Population Group in '+ town,
+        font: {
+            family: 'Raleway, sans-serif'
+        },
+        showlegend: false,
+        xaxis: {
+            tickangle: -45
+        },
+        yaxis: {
+            zeroline: false,
+            gridwidth: 2
+        },
+        bargap: 0.05
+    };
+    return Plotly.newPlot('populationGroupInfoPlace', data, layout);
+  }
+
 });
