@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function(){
     onArea('Cape Town');
     setGenderTable('Cape Town');
     myBarChart('Cape Town');
+    populationBarChart('Cape Town');
   });
 
   var selectTown = document.getElementById('forMap');
