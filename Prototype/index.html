@@ -144,40 +144,6 @@
     }
 
 </script>
-    <!---- LANGUAGE TABLE JS -->
-<script>
-  /*
-    var trace1 = {
-        x: ['Afrikaans', 'English', 'isiXhosa', 'Sesotho', 'isiZulu', 'Setswana', 'Isindebele', 'Xitsonga', 'Sign language', 'Other'],
-        y: [54.25, 30.20, 9.28, 0.78, 0.52, 0.39, 0.26, 0.13, 0.13, 4.18],
-        type: 'bar',
-        text: ['4.17 below the mean', '4.17 below the mean', '0.17 below the mean', '0.17 below the mean', '0.83 above the mean', '7.83 above the mean'],
-        marker: {
-            color: 'rgb(142,124,195)'
-        }
-    };
-
-    var data = [trace1];
-
-    var layout = {
-        title: 'Languages in Cape town',
-        font: {
-            family: 'Raleway, sans-serif'
-        },
-        showlegend: false,
-        xaxis: {
-            tickangle: -45
-        },
-        yaxis: {
-            zeroline: false,
-            gridwidth: 2
-        },
-        bargap: 0.05
-    };
-
-    Plotly.newPlot('myDiv', data, layout);
-    */
-</script>
 <script>
     window.addEventListener('load', function(){
 
@@ -197,17 +163,46 @@
            {position:{lat: 18.58435864, lng: -33.9379211}
          });
         var cptLayer = showCapeTown();
+        var khayaLayer = showKhayelitsha();
+        var lngLayer = showLanga();
+        var prwLayer = showParow();
+        var htbLayer = showHoutBay();
         /*setTimeout(function(){
           cptLayer.setMap(null);
           showKhayelitsha();
         }, 5000)*/
         var selectTown = document.getElementById('forMap');
         function changeSelected(){
-          if(selectTown.options[selectTown.selectedIndex].value === 'Cape Town'){showCapeTown();}
-          else if(selectTown.options[selectTown.selectedIndex].value ==='Khayelitsha'){showKhayelitsha();}
-          else if(selectTown.options[selectTown.selectedIndex].value === 'Langa'){showLanga();}
-          else if(selectTown.options[selectTown.selectedIndex].value === 'Parow'){showParow();}
-          else if(selectTown.options[selectTown.selectedIndex].value === 'Hout Bay'){showHoutBay();}
+          if(selectTown.options[selectTown.selectedIndex].value === 'Cape Town'){
+            lngLayer.setMap(null);
+            prwLayer.setMap(null);
+            htbLayer.setMap(null);
+            khayaLayer.setMap(null);
+            showCapeTown();}
+          else if(selectTown.options[selectTown.selectedIndex].value ==='Khayelitsha'){
+            cptLayer.setMap(null);
+            lngLayer.setMap(null);
+            prwLayer.setMap(null);
+            htbLayer.setMap(null);
+            showKhayelitsha();}
+          else if(selectTown.options[selectTown.selectedIndex].value === 'Langa'){
+            cptLayer.setMap(null);
+            khayaLayer.setMap(null);
+            prwLayer.setMap(null);
+            htbLayer.setMap(null);
+            showLanga();}
+          else if(selectTown.options[selectTown.selectedIndex].value === 'Parow'){
+            cptLayer.setMap(null);
+            khayaLayer.setMap(null);
+            lngLayer.setMap(null);
+            htbLayer.setMap(null);
+            showParow();}
+          else if(selectTown.options[selectTown.selectedIndex].value === 'Hout Bay'){
+            cptLayer.setMap(null);
+            khayaLayer.setMap(null);
+            lngLayer.setMap(null);
+            prwLayer.setMap(null);
+            showHoutBay();}
         }
         selectTown.addEventListener('change', function(){
           changeSelected();
@@ -223,21 +218,25 @@
       var kmllayer = new google.maps.KmlLayer(
         thelist[1].Khayelitsha,
         {map: map, clickable: false});
+        return kmllayer;
     }
     function showLanga(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[2].Langa,
         {map: map, clickable: false});
+        return kmllayer;
     }
     function showParow(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[3].Parow,
         {map: map, clickable: false});
+        return kmllayer;
     }
     function showHoutBay(){
       var kmllayer = new google.maps.KmlLayer(
         thelist[4].HoutBay,
         {map: map, clickable: false});
+        return kmllayer;
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz9g0tAMVgP8bZx5LYtbY1t42Y_nsCTTw&callback=initMap"></script>
